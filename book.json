@@ -1,0 +1,19 @@
+{
+    "plugins":[
+        "expandable-chapters-small",
+        "donate"
+    ],
+    "pluginsConfig": {
+        "donate": {
+          "wechat": "./images/good.jpg",
+          "title": "",
+          "button": "赞赏",
+          "wechatText": "微信捐赠"
+        },
+        "fontsettings": {
+            "theme": "white",
+            "family": "serif",
+            "size":  1
+        }
+    }
+}
