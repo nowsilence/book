@@ -8,6 +8,7 @@
     * [夹角](math/Angle.md)
     * [向量](math/Vector.md)
     * [数值封装](math/Wrap.md)
+    * [贝赛尔曲线](math/BezierCurve.md)
 * [VSCode](VSCode.md)
 * [Potree](README.md)
     * [PotreeConvert](potree/PotreeConvert.md)

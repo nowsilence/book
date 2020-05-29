@@ -1,4 +1,8 @@
 {
+    "title": "兜兜爸爸的博客",
+    "author": "兜兜爸爸",
+    "description": "一些笔记",
+    "language": "zh-hans",
     "plugins":[
         "expandable-chapters-small",
         "donate"

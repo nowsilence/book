@@ -55,3 +55,4 @@ p33 = u0 * u1 * u1 * p1 + (t0 * u1 * u1 + u0 * t1 * u1 + u0 * u1 * t1) * p2 + (t
 
 ```
 
+[参考](https://stackoverflow.com/questions/878862/drawing-part-of-a-b%C3%A9zier-curve-by-reusing-a-basic-b%C3%A9zier-curve-function)
