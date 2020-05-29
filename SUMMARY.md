@@ -7,6 +7,7 @@
 * [数学](README.md)
     * [夹角](math/Angle.md)
     * [向量](math/Vector.md)
+    * [数值封装](math/Wrap.md)
 * [VSCode](VSCode.md)
 * [Potree](README.md)
     * [PotreeConvert](potree/PotreeConvert.md)
