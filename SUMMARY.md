@@ -9,6 +9,7 @@
     * [向量](math/Vector.md)
     * [数值封装](math/Wrap.md)
     * [贝赛尔曲线](math/BezierCurve.md)
+    * [线段相交](math/LineSegmentIntersect.md)
 * [VSCode](VSCode.md)
 * [Potree](README.md)
     * [PotreeConvert](potree/PotreeConvert.md)
