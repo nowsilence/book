@@ -13,4 +13,7 @@
 * [VSCode](VSCode.md)
 * [Potree](README.md)
     * [PotreeConvert](potree/PotreeConvert.md)
+* [Mac](README.md)
+    * [卸载](mac/uninstall.md)
+* [Maven](Maven.md)
 
