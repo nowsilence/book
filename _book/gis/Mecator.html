@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>PotreeConvert · 兜兜爸爸的博客</title>
+        <title>墨卡托投影 · 兜兜爸爸的博客</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -65,10 +65,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../" />
+    <link rel="next" href="../VSCode.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="Project.html" />
     
 
     </head>
@@ -246,9 +246,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="../gis/gis.html">
+        <li class="chapter " data-level="1.6" data-path="gis.html">
             
-                <a href="../gis/gis.html">
+                <a href="gis.html">
             
                     
                     GIS
@@ -260,9 +260,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../gis/Project.html">
+        <li class="chapter " data-level="1.6.1" data-path="Project.html">
             
-                <a href="../gis/Project.html">
+                <a href="Project.html">
             
                     
                     地心坐标系投影
@@ -273,9 +273,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="../gis/Mecator.html">
+        <li class="chapter active" data-level="1.6.2" data-path="Mecator.html">
             
-                <a href="../gis/Mecator.html">
+                <a href="Mecator.html">
             
                     
                     墨卡托投影
@@ -318,9 +318,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.8.1" data-path="PotreeConvert.html">
+        <li class="chapter " data-level="1.8.1" data-path="../potree/PotreeConvert.html">
             
-                <a href="PotreeConvert.html">
+                <a href="../potree/PotreeConvert.html">
             
                     
                     PotreeConvert
@@ -411,7 +411,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >PotreeConvert</a>
+        <a href=".." >墨卡托投影</a>
     </h1>
 </div>
 
@@ -426,32 +426,34 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p><strong> LAStools&#x7F16;&#x8BD1; Linux </strong></p>
-<pre><code>cd ~/dev/workspaces/lastools
-git clone https://github.com/m-schuetz/LAStools.git master
-cd master/LASzip
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Release  -DCMAKE_CXX_COMPILER=/usr/local/bin/g++ ..
-make
-</code></pre><p><strong> PotreeConvert &#x7F16;&#x8BD1; Linux </strong></p>
-<pre><code>cd ~/dev/workspaces/PotreeConverter
-git clone https://github.com/potree/PotreeConverter.git master
-cd master
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DLASZIP_INCLUDE_DIRS=~/dev/workspaces/lastools/master/LASzip/dll -DLASZIP_LIBRARY=~/dev/workspaces/lastools/master/LASzip/build/src/liblaszip.so  -DCMAKE_CXX_COMPILER=/usr/local/bin/g++ ..
-make
+                                <p><strong>&#x58A8;&#x5361;&#x6258;&#x6295;&#x5F71;</strong></p>
+<pre><code>const EquatorialRadius = 6378137.0; // &#x8D64;&#x9053;&#x534A;&#x5F84;
+const PolarRadius = 6356752.0; // &#x6781;&#x5730;&#x534A;&#x5F84;
 
-# copy ./PotreeConverter/resources/page_template to your binary working directory.
-</code></pre><p>&#x82E5;&#x62A5;&#x9519;&#xFF1A;</p>
-<pre><code>error: invalid initialization of non-const reference of type &#x2018;Potree::Point&amp;&#x2019; from an rvalue of type &#x2018;Potree::Point&#x2019; writer-&gt;write(reader-&gt;getPoint()); ~~~~~~~~~~~~~~~~^~
-</code></pre><pre><code>&#x6587;&#x4EF6;&#xFF1A;PotreeConverter/PotreeConverter/src/PotreeWriter.cpp
+const PIR = Math.PI * EquatorialRadius;
+const PI2 = Math.PI / 2;
+const PIR180 = PIR / 180;
 
-writer-&gt;write(reader-&gt;getPoint());
-&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;
-Potree::Point point = reader-&gt;getPoint();
-writer-&gt;write(point);
+project(coordinate) {
+    const [lng, lat, altitude = 0] = coordinate;
+
+    const x = lng * PIR180;
+    const y = Math.log(Math.tan((90 + lat) * Math.PI / 360)) / RAD * PIR180;
+    if (isNaN(x)) {
+        console.log(&apos;&#x5750;&#x6807;&#x9519;&#x8BEF;&#xFF01;&apos;);
+    }
+    return [x, y, altitude];
+}
+
+unproject(point) {
+    const [x, y, z = 0] = point;
+
+    const lng =  x / PIR * 180;
+    let lat = y / PIR * 180;
+    lat =  180 / Math.PI * ( 2 * Math.atan(Math.exp(lat * RAD))- PI2);
+
+    return [lng, lat, z];
+}
 </code></pre>
                                 
                                 </section>
@@ -479,12 +481,12 @@ writer-&gt;write(point);
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Potree">
+                <a href="Project.html" class="navigation navigation-prev " aria-label="Previous page: 地心坐标系投影">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../" class="navigation navigation-next " aria-label="Next page: Mac">
+                <a href="../VSCode.html" class="navigation navigation-next " aria-label="Next page: VSCode">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -495,7 +497,7 @@ writer-&gt;write(point);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"PotreeConvert","level":"1.8.1","depth":2,"next":{"title":"Mac","level":"1.9","depth":1,"path":"README.md","ref":"README.md","articles":[{"title":"卸载","level":"1.9.1","depth":2,"path":"mac/uninstall.md","ref":"mac/uninstall.md","articles":[]}]},"previous":{"title":"Potree","level":"1.8","depth":1,"path":"README.md","ref":"README.md","articles":[{"title":"PotreeConvert","level":"1.8.1","depth":2,"path":"potree/PotreeConvert.md","ref":"potree/PotreeConvert.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["expandable-chapters-small","donate"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"donate":{"alipay":"","alipayText":"支付宝打赏","button":"赞赏","title":"","wechat":"./images/good.jpg","wechatText":"微信捐赠"},"fontsettings":{"theme":"white","family":"serif","size":1},"expandable-chapters-small":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"兜兜爸爸","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"兜兜爸爸的博客","language":"zh-hans","gitbook":"*","description":"一些笔记"},"file":{"path":"potree/PotreeConvert.md","mtime":"2020-06-08T03:08:34.101Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T06:24:06.921Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"墨卡托投影","level":"1.6.2","depth":2,"next":{"title":"VSCode","level":"1.7","depth":1,"path":"VSCode.md","ref":"VSCode.md","articles":[]},"previous":{"title":"地心坐标系投影","level":"1.6.1","depth":2,"path":"gis/Project.md","ref":"gis/Project.md","articles":[]},"dir":"ltr"},"config":{"plugins":["expandable-chapters-small","donate"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"donate":{"alipay":"","alipayText":"支付宝打赏","button":"赞赏","title":"","wechat":"./images/good.jpg","wechatText":"微信捐赠"},"fontsettings":{"theme":"white","family":"serif","size":1},"expandable-chapters-small":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"兜兜爸爸","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"兜兜爸爸的博客","language":"zh-hans","gitbook":"*","description":"一些笔记"},"file":{"path":"gis/Mecator.md","mtime":"2020-06-19T06:20:54.323Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T06:24:06.921Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

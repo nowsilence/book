@@ -1,4 +1,4 @@
-
+**求点到线段上的垂足点（不一定在线段上）**
 
 ```
 function pedalPoint(p, p0, p1) {
@@ -53,5 +53,6 @@ function pedalPoint(p, p0, p1) {
     return { x: x, y: y, z: z }
 }
 
-[参考](https://www.cnblogs.com/star91/articles/4770453.html)
 ```
+
+[参考](https://www.cnblogs.com/star91/articles/4770453.html)
