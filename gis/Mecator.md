@@ -30,3 +30,23 @@ unproject(point) {
     return [lng, lat, z];
 }
 ```
+
+**分辨率/墨卡托级别互换**
+
+```
+
+const degree2Rad = Math.PI / 180.0;
+// 地球半径
+const EarthRadius = 6378137;
+// 瓦片大小
+const tileSize = 256;
+// 当前纬度的周长
+const circumference = Math.cos(degree2Rad * lat) * PI2 * EarthRadius;
+
+// 知道当前级别 level，求当前纬度的分辨率 单位 米/像素
+const resolution = circumference / Math.pow(2, level) / tileSize;
+
+// 已知分辨率 resolution ，求当前级别
+const level = Math.floor(Math.log2(circumference / (tileSize * resolution)));
+
+```
