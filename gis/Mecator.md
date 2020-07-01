@@ -34,6 +34,7 @@ unproject(point) {
 **分辨率/墨卡托级别互换**
 
 ```
+const PI2 = Math.PI * 2;
 
 const degree2Rad = Math.PI / 180.0;
 // 地球半径
