@@ -1,7 +1,7 @@
 ** 格林公式求多边形面积 **
 
-```
-function polygonArray(points) {
+```javascript
+function polygonArea(points) {
     points.push(points[0]);
     let s = 0;
     for (let i = 0; i < points.length - 1; i++) {

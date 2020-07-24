@@ -88,7 +88,7 @@ class Test
 
 
 ** 点是否在线段上 **
-```
+```java
 final static double EPSILON = 0.0000001;
 
 public static boolean pointInSegment(Point p, Point p0, Point p1) {
