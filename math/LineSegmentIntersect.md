@@ -41,7 +41,7 @@ class Test
         double determinant = a1*b2 - a2*b1; 
        
         if (determinant == 0) 
-        { 
+        { a
             // The lines are parallel. This is simplified 
             // by returning a pair of FLT_MAX 
             return new Point(Double.MAX_VALUE, Double.MAX_VALUE); 

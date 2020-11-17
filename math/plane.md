@@ -41,3 +41,5 @@ if (t < 0) {
 
 return target.copy( direction ).multiplyScalar( t ).add( line.start );
 ```
+
+[参考](https://blog.csdn.net/csxiaoshui/article/details/78211866)

@@ -4,13 +4,13 @@
 ```
 /**
  * 二次贝塞尔曲线方程
- * @param  {Array<number>} start 起点
- * @param  {Array<number>} 曲度点
- * @param  {Array<number>} end 终点
+ * @param  p0 起点
+ * @param  p1 曲度点
+ * @param  p2 终点
  * @param  {number} 绘制进度(0-1)
  */
 function quadraticBezier(p0, p1, p2, t) {
-    cont k = 1 - t;
+    const k = 1 - t;
     return k * k * p0 + 2 * (1 - t) * t * p1 + t * t * p2; 
 }
 
