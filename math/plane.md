@@ -8,7 +8,7 @@ var direction;
 var point;
 // 面法向量 单位向量
 var normal;
-// 面常量
+// 面常量 原点到平面上任意点的向量到面法向量的投影（投影有正负）
 var constant;
 
 var result;
