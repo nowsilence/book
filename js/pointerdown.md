@@ -1,0 +1,5 @@
+onpointerdown属性
+该GlobalEventHandlers事件处理程序onpointerdown被用来指定pointerdown事件的事件处理程序，在初始按下指针设备时将触发该处理器。这个事件可以被发送到Window，Document和Element对象。
+由于使用鼠标或鼠标兼容的设备而生成的用户活动，这在功能上等同于mousedown事件。如果pointerdown事件不是通过对preventDefault ()的调用而取消的，则大多数用户代理将触发一个mousedown事件，以便不使用指针事件的站点能够正常工作。
+
+即在pointerdown处理函数里调用preventDefault()方法，就不再发送mousedown事件了

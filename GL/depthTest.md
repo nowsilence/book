@@ -1,0 +1,1 @@
+Even if the depth buffer exists and the depth mask is non-zero, the depth buffer is not updated if the depth test is disabled
