@@ -9,7 +9,7 @@ export const RAD = Math.PI / 180.0;
  * @param {*} lat 
  * @param {*} lon 
  * @param {number} distance 距离 单位米
- * @param {number} angle 角度 与正北方向夹角，顺时针
+ * @param {number} anesgle 角度 与正北方向夹角，顺时针
  */
 export function getlatLon(lon, lat, distance, angle) {
 

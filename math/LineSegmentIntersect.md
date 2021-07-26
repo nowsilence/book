@@ -106,3 +106,38 @@ public static boolean pointInSegment(Point p, Point p0, Point p1) {
     return false;
 }
 ```
+
+** 三维空间两条线段是否相交 **
+```javascript
+
+function intersectionLineSegment(p00, p01, p10, p11) {
+    _v0.subVectors(p01, p00);
+    _v1.subVectors(p11, p10);
+
+    return _intersectionLineSegment(p00, _v0, p10, _v1);
+}
+
+function _intersectionLineSegment(p0, v0, p1, v1) {
+    // 是否平行
+    if (v0.dot(v0) == 1) return false;
+
+    const startPointSeg = new Vector3().copy(p1).sub(p0);
+    // 有向面积1
+    const vs1 = new Vector3().copy(v0).cross(v1);
+    // 有向面积2
+    const vs2 = new Vector3().copy(startPointSeg).cross(v1);
+    
+    const val = startPointSeg.dot(vs1);
+
+    const esp = 0.000001;
+    // 若不共面
+    if (val >= eps || val <= -eps) return false;
+
+    const val2 = vs2.dot(vs1) / vs1.lengthSq();
+
+    // 若交点在延长线上
+    if (val2 > 1 || val2 < 0) return false;
+
+    return p0.clone().add(v0.multiplyScalar(val2));
+}
+```
