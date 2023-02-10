@@ -1,5 +1,6 @@
-```javascript
+[参考](https://www.geometrictools.com/Documentation/IntersectionLineCone.pdf)
 
+```javascript
 const INTERSECTION_TYPE = {
     EMPTY: 0,
     POINT: 1,
@@ -8,6 +9,26 @@ const INTERSECTION_TYPE = {
     SEGMENT: 4,
 };
 Object.freeze(INTERSECTION_TYPE);
+
+class Cone {
+    constructor(ray, angle, minHeight = 0, maxHeight = -1) {
+        this.ray = ray;
+        this.minHeight = minHeight;
+        this.maxHeight = maxHeight;
+        this.angle = angle;
+
+        const cosAngle = Math.cos(angle);
+        this.cosAngleSqr = cosAngle * cosAngle;
+    }
+
+    heightInRange(h) {
+        return this.minHeight <= h && (this.maxHeight != -1 ? h <= this.maxHeight : true);
+    }
+
+    get isFinite() {
+        return this.maxHeight != -1;
+    }
+}
 
 function setEmpty(result) {
     result.t[0] = Infinity;
@@ -86,7 +107,7 @@ function findIntersection1(u0, u1, v, overlap) {
 }
 
 function setPointClamp(t0, h0, cone, result) {
-    if (cone.HeightInRange(h0)) {
+    if (cone.heightInRange(h0)) {
         setPoint(t0, result);
     } else {
         setEmpty(result);
@@ -98,9 +119,9 @@ function setSegmentClamp(t0, t1, h0, h1, DdU, DdPmV, cone, result) {
         let numValid;
         const ovelap = [];
         if (cone.isFinite) {
-            numValid = findIntersection(h0, h1, cone.hmin, cone.hmax, ovelap);
+            numValid = findIntersection(h0, h1, cone.minHeight, cone.maxHeight, ovelap);
         } else {
-            numValid = findIntersection1(h0, h1, cone.hmin, ovelap);
+            numValid = findIntersection1(h0, h1, cone.minHeight, ovelap);
         }
 
         if (numValid == 2) {
@@ -125,7 +146,7 @@ function setSegmentClamp(t0, t1, h0, h1, DdU, DdPmV, cone, result) {
 function setRayClamp(h, DdU, DdPmV, cone, result) {
     if (cone.isFinite) {
         const overlap = [];
-        const numValid = findIntersection1(cone.hmin, cone.hmax, h, overlap);
+        const numValid = findIntersection1(cone.minHeight, cone.maxHeight, h, overlap);
         if (numValid == 2) {
             return setSegment((overlap[0] - DdPmV) / DdU, (overlap[1] - DdPmV) / DdU, result);
         } else if (numValid == 1) {
@@ -134,7 +155,7 @@ function setRayClamp(h, DdU, DdPmV, cone, result) {
             return setEmpty(result);
         }
     } else {
-        return setRayPositive((Math.max(cone.hmin, h) - DdPmV) / DdU, result);
+        return setRayPositive((Math.max(cone.minHeight, h) - DdPmV) / DdU, result);
     }
 }
 
@@ -231,7 +252,7 @@ function lineIntersectsCone(ray, cone, result) {
     if (ray.direction.dot(cone.ray.direction) >= 0) {
         intersection(ray, cone, result);
     } else {
-        ray.direction.negative();
+        ray.direction.negate();
         intersection(ray, cone, result);
         result.t[0] = -result.t[0];
         result.t[1] = -result.t[1];
