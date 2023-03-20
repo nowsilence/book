@@ -1,0 +1,94 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Curvas</title>
+  <link href="layout.css" rel="stylesheet">
+  <script src="cubicBezier.js"></script>
+  <style>
+    article{
+      max-width: 900px;
+      margin: auto;
+    }
+    .playable-buttons{
+      margin-left:auto;
+    }
+    .playable-code{
+      width:900px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Learn about this code on MDN: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale -->
+  <article>
+  <canvas id="canvas" width="800" height="800" class="playable-canvas"></canvas>
+ 
+  <script>
+  	
+	  var canvas = document.getElementById("canvas");
+	  var ctx = canvas.getContext("2d");
+	  canvas.strokeStyle = '#000000';
+	  const width = canvas.clientWidth;
+	  const height = canvas.clientHeight;
+	  var points = [
+		  {x: -width * 0.25, y: 0},
+		  {x: -width * 0.125 + 300, y: height / 2},
+		  {x: width * 0.125 + 300, y: height / 2},
+		  {x: width * 0.25, y: 0}
+	  ];
+	  
+	  function drawCircle(c, canv, color,radius=5) { //desenha um círculo
+	      canv.beginPath();
+	      canv.strokeStyle = '#000000';
+	      canv.arc(c[0], c[1], radius, 0, 2 * Math.PI, false);
+	      canv.lineWidth = 2;
+	      canv.fillStyle = color;
+	      canv.fill();
+	      canv.setLineDash([]);
+	      canv.strokeStyle = color;
+	      canv.stroke();
+	      canv.fillStyle = '#000000';
+	  }
+	  
+	  const bezier = new CubicBezier(...points);
+	  
+	  ctx.beginPath();
+	  for (let i = 0; i <= 1000; i++) {
+		  const p = bezier.evaluate(i / 1000);
+		  if (i == 0) {
+		  	  ctx.moveTo(p.x + width / 2, -p.y + height / 2);
+		  } else {
+			  ctx.lineTo(p.x + width / 2, -p.y + height / 2);
+		  }
+	  }
+	  
+	  ctx.stroke();
+	  
+	  const length = bezier.length;
+	  let offset = 0;
+	  let p = bezier.evaluateByOffset(offset);
+	  drawCircle([p.x + width / 2, -p.y + height / 2], ctx, '#FF0000');
+	  let lx = points[0].x;
+	  let ly = points[0].y;
+	  
+	  while(offset <= length) {
+		  offset += 50;
+		  
+		  if (offset < length) {
+			  p = bezier.evaluateByOffset(offset);
+			  drawCircle([p.x + width / 2, -p.y + height / 2], ctx, '#FF0000');
+			  
+			  const lengthSq = (p.x - lx) * (p.x - lx) + (p.y - ly) * (p.y - ly);
+			  console.log(Math.sqrt(lengthSq));
+			  lx = p.x;
+			  ly = p.y;
+		  }
+	  }
+	  
+	  points.forEach(it => drawCircle([it.x + width / 2, -it.y + height / 2], ctx, '#00FF00'))
+  </script>
+</article>
+</body>
+
+</html>
