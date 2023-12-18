@@ -35,6 +35,18 @@ class A{
 }
 
 
+babel-plugin-transform-decorators-legacy
+装饰器
+
+
+@babel/plugin-proposal-optional-chaining
+可选链 ？
+配置
+{
+  "plugins": ["@babel/plugin-proposal-optional-chaining"]
+}
+
+
 babel-plugin-syntax-dynamic-import
 用以解析识别import()动态导入语法---并非转换，而是解析识别
 {
@@ -50,7 +62,49 @@ import('./a.js').then(()=>{
 {
     "plugins": [
         "@babel/plugin-transform-runtime",
-        ["@babel/plugin-proposal-class-properties", { "loose": true }]
+
+        /*
+            loose
+            boolean, 默认是false
+            当为false的时候, 属性会通过Object.defineProperty的方式为对象赋值, 为true的时候, 直接通过点语法赋值
+            class A{
+                foo!: string
+                bar: string = "bar";
+                static rogen = "rogen";
+            }
+
+            参数 loose = true 编译后得效果
+
+            class A{
+                construtor(){
+                    this.foo = void 0 
+                    this.bar = 'bar'
+                }
+            }
+            A.rogen = 'rogen'
+
+            参数 loose = false 编译后得效果
+
+
+            function _defineProperty(obj, key, value) { 
+                if (key in obj) { 
+                    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); 
+                } else { 
+                    obj[key] = value; 
+                }
+                return obj; 
+            }
+
+            class A{
+                construtor(){
+                    _defineProperty(this, "bar", "rogen");
+                    _defineProperty(this, "foo", void 0);
+                }
+            }
+            _defineProperty(A, "rogen", "rogen");
+        */
+        ["@babel/plugin-proposal-class-properties", { "loose": true }],
+        ["transform-decorators-legacy"]
     ],
     "preset": [
         [

@@ -1,3 +1,6 @@
+/***
+ *  参考[https://blog.csdn.net/LuDanTongXue/article/details/117000752]
+ */
 class Polynomial {
     constructor(degree, coeff) {
         this.degree = degree || 0;
@@ -33,8 +36,8 @@ function integratePolynomial(polynomial, interval) {
     
     ua = interval.u1;
     ub = interval.u2;
-    midu = (ua + ub) / 2.0;
-    diff = (ub - ua) / 2.0;
+    midu = (ua + ub) * 0.5;
+    diff = (ub - ua) * 0.5;
     length = 0.0;
     
     for (let i = 0; i < 5; i++) {
@@ -82,7 +85,7 @@ function subdivide(table, fullInterval, polynomial, totalLength, tolerangce) {
         return totalLength;
     }
 }
-
+// 参考[https://blog.csdn.net/VictoryCzt/article/details/80660113/]
 function adaptiveIntegration(curve, u1, u2, tolerangce) {
 
     const func = new Polynomial(4);

@@ -9,7 +9,7 @@ renderer.render(scene, camera)
 
 在shader中，采样深度纹理，有些特殊。
 深度纹理以前好像需要转解码float类型到RGBA四个通道，现在似乎是不用了，系统
-通常支持DepthFormat, 对应的ext为 webgl_depth_texture?
+通常支持DepthFormat, 对应的ext为 webgl_depth_texture?（webgl2本身就支持，webgl1需要扩展）
 深度纹理的类型，在THREEJS中有两种：
 
 DepthFormat(默认)

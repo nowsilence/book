@@ -63,4 +63,63 @@ function intersectSegment(p0, p1, q0, q1) {
 
     return result;
 }
+function pointDistSegment(point, start, end) {
+    const v0 = point.clone().sub(start);
+    const v1 = end.clone().sub(start);
+
+    const v1sqrLength = v1.dot(v1);
+    const v1_v0 = v1.dot(v0);
+
+    let t = v1_v0 / v1sqrLength;
+
+    if (clampToLine) {
+        t = Math.max(0, Math.min(1, t));
+    }
+
+    v1.multiplyScalar(t).add(start);
+
+    return {
+        t,
+        distance: v1.distanceTo(point),
+        point: v1
+    };
+}
+
+function douglasPeucker3(points, epsilon) {
+    const stack = [
+        {
+            start: 0,
+            end: points.length - 1
+        }
+    ];
+
+    const result = [];
+    while(stack.length > 0) {
+        const tmp = stack.pop();
+        let dMax = 0;
+        let index = 0;
+
+        for (let g = tmp.start + 1; g < tmp.end; g++) {
+            const { distance } = pointDistSegment(points[g], points[tmp.start], points[tmp.end]);
+            if (distance > dMax) {
+                index = g;
+                dMax = distance;
+            }
+        }
+
+        if (dMax > epsilon) {
+            stack.push({ start: tmp.start, end: index });
+            stack.push({ start: index, end: tmp.end });
+        } else {
+            if (result.length) {
+                result.pop();
+            }
+
+            result.push(points[tmp.end]);
+            result.push(points[tmp.start]);
+        }
+    }
+
+    return result.reverse();
+}
 ```

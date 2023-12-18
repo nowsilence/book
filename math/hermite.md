@@ -1,7 +1,7 @@
 ** Hermite曲线函数 **
 ```javascript
-function computeHermite(h1, h2, h3, h4, v0, v1, t0, t1) {
-    return h1 * v0 + h2 * v1 + h3 * t0 + h4 * t1;
+function computeHermite(h1, h2, h3, h4, p0, p1, v0, v1) {
+    return h1 * p0 + h2 * p1 + h3 * v0 + h4 * v1;
 }
 
 /**
@@ -12,7 +12,7 @@ function computeHermite(h1, h2, h3, h4, v0, v1, t0, t1) {
  **/
 function hermite(p0, p1, vt0, vt1, t) {
     const t2 = t * t;
-    const t3 = t2 * t;
+    const t3 = t2 * t; 
 
     const h1 = 2 * t3 - 3 * t2 + 1;
     const h2 = -2 * t3 + 3 * t2;
