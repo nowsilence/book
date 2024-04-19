@@ -49,6 +49,8 @@ git checkout Branch2
 git rebase Branch1
 若有冲突，解决冲突后add，执行git rebase --continue
 
+git stash pop [number] -- git stash pop 2
+git stash show [numer] -- git stash show 2
 type：用于说明 commit 的类型，被指定在 commitlint.config.js 的 type-enum
 feat：新功能（feature）
 fix：修补bug
