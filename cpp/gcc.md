@@ -13,3 +13,8 @@
 -l 小写的L，后面跟需要的链接库，如-lm，
 -L 表示选择链接库的目录，如-L /usr/lib
 -I 大写的i，指定头文件的目录
+-Wl后面的东西是作为参数传递给链接器ld的，比如gcc -Wl,aaa,bbb,ccc，最后会被解释为：ld aaa bbb ccc
+
+-Wl,-Bstatic 和 -Wl,-Bdynamic 指定链接动态库或者静态库
+
+/usr usr是指Unix System Resources的缩写

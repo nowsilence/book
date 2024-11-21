@@ -1,0 +1,1 @@
+ 在尝试安装element-ui时遇到npm错误代码ERESOLVE，无法解决vue版本的依赖树冲突。项目中指定的vue版本为3.2.47，但element-ui要求的是vue@^2.5.17。解决方法是在npm安装命令后添加--legacy-peer-deps参数，以接受可能不兼容的依赖解析。
