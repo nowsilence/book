@@ -7,7 +7,7 @@ npm config set registry https://registry.npmmirror.com
 
 #恢复镜像#
 npm config set registry https://registry.npmjs.org/
-
+npm config set registry https://npmmirror.com/
 
 npm install -g cnpm --registry=https://registry.npm.taobao.org // 过期了 用https://registry.npmmirror.com
 cnpm是什么？

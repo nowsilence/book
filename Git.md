@@ -33,6 +33,12 @@ git merge --continue //提交完这一个冲突之后，继续其他冲突,zuoyo
 git cherry-pick 后有冲突
 解决冲突后
 git cherry-pick --continue
+git cherry-pick 会导致提交的commit id变更
+
+删除某一条提交记录commit_1，他的前一条记录为commit_0
+git rebase -i commit_0
+进入编辑模式，把想要删除的记录由pick改为drop
+会导致commit_0之后的所有提交记录的commitid变更
 
 切到master分支，
 执行git merge branch1，

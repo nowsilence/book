@@ -27,7 +27,7 @@ function convertYPos2Lat(y) {
 }
 
 /**
- * 标准化坐标赚瓦片编号
+ * 标准化坐标赚瓦片编号，不包含瓦片等级
  */
 function calTileByXYPos(x, y, level) {
 
@@ -214,5 +214,46 @@ function calRectByTile(tile, level = 13) {
 
 function calTileByMorttonCode(mortionCode, level) {
     return mortionCode >> (63 - (2 * level + 1));
+}
+```
+
+```c++
+INT NdsDal_Util_CalTileIDByXYPos(INT a_PosX, INT a_PosY, BYTE a_bLevel, PINT a_piTileID)
+{
+    /*
+    前 16 - level 位 存储tile等级
+    中间 15 - level 位存储 0 ，占位
+    后 2 * level + 1 位 DNS坐标的Morton Code
+    根据 6级 Tile ID编码规则 ： 10位（tile等级16-6=10 ） + 9位（中间占位15-6=9）+13位（nds坐标的Morton Code）
+     nds_x 选取7位
+     nds_x = 1443693842 = 0101011 0000011010000010100010010
+     nds_y 选取7位,舍弃头部一位(因为它永远是0)
+     nds_y = 368449257 = 0 001010 1111101100001011011101001
+     https:blog.csdn.net/yujikang123/article/details/143230824
+     */
+
+	INT iTileNum = a_PosX < 0 ? 1 : 0;
+	INT iPosition;
+	for (iPosition = 30; iPosition > (30 - a_bLevel); iPosition--) // 取a_PosX，a_PosY的前30~30 - a_bLevel位，
+	{
+		iTileNum <<= 1;
+		if ( a_PosY & 1 << iPosition )
+		{
+			iTileNum |= 1;
+		}
+		iTileNum <<= 1;
+		if ( a_PosX & 1 << iPosition )
+		{
+			iTileNum |= 1;
+		}
+	}
+    // 写入瓦片等级
+    // morton code 占位：2 * a_bLevel + 1
+    // 中间占位：15 - a_bLevel
+    // （2 * a_bLevel + 1） + （15 - a_bLevel）+ 1
+    // 又因为初始用了一位，所以（2 * a_bLevel） + （15 - a_bLevel）+ 1
+    // 整理得16 + a_bLevel
+	*a_piTileID = iTileNum + ( 1 << (16 + a_bLevel));
+	return 1;
 }
 ```

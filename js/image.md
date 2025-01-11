@@ -26,4 +26,7 @@ Render.Ajax.get('./resource/texture/kerb/WPS0000001.jpg', {
     })
     }
 });
+
+// 图片跨域问题
+https://juejin.cn/post/6844903795726483463
 ```

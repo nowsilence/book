@@ -33,7 +33,7 @@ function pedalPoint(p, p0, p1) {
 
     var dx = p0.x - p1.x;
     var dy = p0.y - p1.y;
-    var dy = p0.z - p1.z;
+    var dz = p0.z - p1.z;
 
     if(Math.abs(dx) < 0.00000001 && Math.abs(dy) < 0.00000001 && Math.abs(dz) < 0.00000001) {
         return p0;
@@ -45,7 +45,7 @@ function pedalPoint(p, p0, p1) {
 
     u = u / (dx * dx + dy * dy + dz * dz);
 
-    var x = p0.x + u * dx;
+    var x = p0.x + u * dx; 
 
     var y = p0.y + u * dy;
 
