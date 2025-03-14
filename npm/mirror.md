@@ -1,4 +1,6 @@
 ```
+npm config get registry
+
 #设置淘宝镜像#
 npm config set registry http://registry.npm.taobao.org/
 

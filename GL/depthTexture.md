@@ -20,5 +20,9 @@ float depth = texture2D(depthTexture, uv).r;
 这里的depth即是深度缓冲区的值，近截面深度值为0， 远截面深度值为1， 非线性，为了表现，
 靠近近截面会占用更多的精度。
 
+gl.texImage2D(gl.TEXTURE_2D, 0, gl.DEPTH_STENCIL, canvas.width, canvas.height, 0, gl.DEPTH_STENCIL, gl.UNSIGNED_INT_24_8, null);
+gl.UNSIGNED_INT_24_8 存储格式，其中深度部分使用 24 位，模板部分使用 8 位。
+
 TODO 深度转换函数
 Unity 中LinearEyeDepth 负责把深度纹理的采样结果转换到视角空间下的深度值，也 就是我们上面得到的Z(visw)。而 Linear01Depth 则会返回一个范围在[0, 1]的线性深度值
+
