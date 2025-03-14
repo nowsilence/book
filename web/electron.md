@@ -1,0 +1,1 @@
+vue init simulatedgreg/electron-vue my-project1

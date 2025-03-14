@@ -1,15 +1,16 @@
 ```
 npm config get registry
+npm config list
 
 #设置淘宝镜像#
 npm config set registry http://registry.npm.taobao.org/
-
+npm config set registry https://registry.npmmirror.com
 
 #恢复镜像#
 npm config set registry https://registry.npmjs.org/
 npm config set registry https://npmmirror.com/
 
-npm install -g cnpm --registry=https://registry.npm.taobao.org
+npm install -g cnpm --registry=https://registry.npm.taobao.org // 过期了 用https://registry.npmmirror.com
 cnpm是什么？
 简单的讲就是中国版的NPM，因为npm安装插件是从国外服务器下载，受网络影响大，可能出现异常，所以我们乐于分享的淘宝团队干了这事。
 
