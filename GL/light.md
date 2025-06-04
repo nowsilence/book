@@ -4,3 +4,4 @@ BRDF（Bidirectional Reflectance Distribution Function）就是描述表面入�
 emissive color: 材质的自发光颜色
 ambient: 对环境光的反射能力
 ambientColor: color(灯光颜色) * intensity（光强度）
+[光照模型](https://blog.csdn.net/Lindy_pass/article/details/132451425)
