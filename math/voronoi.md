@@ -11,3 +11,29 @@ Voronoi图 被称为 泰森多边形 是因为其命名来源于荷兰气候学�
 d3-voronoi库
 [参考](https://zhuanlan.zhihu.com/p/1894662718138591127)
 [参考](https://zhuanlan.zhihu.com/p/27084187348)
+```javascript
+const polygon = [];
+// 这里为polygon外包矩形的最大值最小值
+const voronoi = d3.voronoi().extent([[minx, miny], [maxx, maxy]]);
+const diagram = voronoi(polygon);
+diagram.links().forEach(it => {
+    // 这里是三角刨分后的三角形的边，点为polygon的形状点
+});
+
+diagram.edges.forEach(it => {
+    // 这里为cel的一条边，it[0], it[1]
+});
+
+diagram.cells.forEach(cell => {
+    /**
+     * 这个是一个cell，
+     * cell.halfedges为cell的边，里面是整型数组，值为diagram.edges的索引
+     * cell.site为cell包含的点（polygon的形状点）
+     * 
+     * */
+})
+
+diagram.polygons().forEach(p => {
+    // p代表着组成一个cell的所有点，diagram.polygons()[n]对应diagram.cells[n]
+});
+```

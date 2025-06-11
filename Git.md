@@ -1,4 +1,5 @@
 ``` 
+git clone --depth=1
 # 将本地子目录推送到远程分支
 git subtree push --prefix 本地目录 origin 分支名称
 
