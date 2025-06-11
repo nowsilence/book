@@ -13,7 +13,7 @@ d3-voronoi库
 [参考](https://zhuanlan.zhihu.com/p/27084187348)
 ```javascript
 const polygon = [];
-// 这里为polygon外包矩形的最大值最小值
+// 这里为polygon外包矩形的最大值最小值, d3默认精度是小数点6位，如果精度不够需要自行缩放处理
 const voronoi = d3.voronoi().extent([[minx, miny], [maxx, maxy]]);
 const diagram = voronoi(polygon);
 diagram.links().forEach(it => {
