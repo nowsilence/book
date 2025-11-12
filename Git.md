@@ -3,6 +3,10 @@ git clone --depth=1
 # 将本地子目录推送到远程分支
 git subtree push --prefix 本地目录 origin 分支名称
 
+git remote update：更新远程跟踪分支、标签等。
+git remote update origin 更新特定仓库
+-p 或 --prune：删除那些在远程仓库中已经不存在的本地引用。
+
 #本地添加远程仓库
 git remote add 本地仓库名称 远程仓库地址（https://github.com/XXX/XXX.git）
 

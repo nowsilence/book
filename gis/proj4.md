@@ -1,7 +1,7 @@
 ```
 +a         椭球体长半轴长度
 +alpha     ? 用于斜墨卡托和其它几个可能的投影
-+axis      轴方向 (new in 4.8.0)
++axis      轴方向 (new in 4.8.0) 默认（+axis=enu）
 +b         椭球体短半轴长度
 +datum     基准面名(见`proj -ld`)
 +ellps     椭球体名(见`proj -le`)
