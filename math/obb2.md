@@ -337,7 +337,7 @@ function computeOBBForDirection(points, direction, normal) {
     
 }
 
-OBB2.fromPoints2 = (points) => {
+OBB2.fromPoints2 = (points, maxIter = 3) => {
 
     if (!points || points.length == 0) {
         return null;
@@ -346,33 +346,58 @@ OBB2.fromPoints2 = (points) => {
     const _points = points.map(it => (Array.isArray(it) ? new THREE.Vector2(...it) : new THREE.Vector2(it.x, it.y)));
 
     // 1. 计算凸包
-    const convexHull1 = convexHullMonotoneChain(_points);
+    const convexHull1 = convexHull(_points);
     
     // 2. 使用旋转卡壳法找到最小面积包围盒
     let minArea = Infinity;
     let bestOBB = null;
     
     const n = convexHull1.length;
-    
-    for (let i = 0; i < n; i++) {
-        // 当前边
-        const current = convexHull1[i];
-        const next = convexHull1[(i + 1) % n];
-        
-        // 计算边的方向向量
-        const edge = new Vector2().subVectors(next, current).normalize();
-        
-        // 计算垂直方向（法向量）
-        const normal = new Vector2(-edge.y, edge.x);
-        
-        // 计算OBB
-        const obb = computeOBBForDirection(convexHull1, edge, normal);
-        
-        if (obb.area < minArea) {
-            minArea = obb.area;
-            bestOBB = obb;
+
+    const xAxes = new Vector2(1, 0);
+    const yAxes = new Vector2();
+    const o = new Vector2(0, 0);
+    let iter = 18;
+    let rot = Math.PI / iter / 2;
+
+    for (let n = 0; n < maxIter; n++) {
+        // console.log(rot * 180 / Math.PI * iter * 2);
+        for (let i = -iter; i <= iter; i++) {
+            const edge = xAxes.clone().rotateAround(o, i * rot);
+            
+            const normal = yAxes.clone().set(-edge.y, edge.x);
+            const obb = computeOBBForDirection(convexHull1, edge, normal);
+            
+            if (obb.area < minArea) {
+                minArea = obb.area;
+                bestOBB = obb;
+            }
         }
+
+        xAxes.copy(bestOBB.direction);
+        rot = rot / iter;
     }
+    
+    
+    // for (let i = 0; i < n; i++) {
+    //     // 当前边
+    //     const current = convexHull1[i];
+    //     const next = convexHull1[(i + 1) % n];
+        
+    //     // 计算边的方向向量
+    //     const edge = new Vector2().subVectors(next, current).normalize();
+        
+    //     // 计算垂直方向（法向量）
+    //     const normal = new Vector2(-edge.y, edge.x);
+        
+    //     // 计算OBB
+    //     const obb = computeOBBForDirection(convexHull1, edge, normal);
+        
+    //     if (obb.area < minArea) {
+    //         minArea = obb.area;
+    //         bestOBB = obb;
+    //     }
+    // }
 
     if (bestOBB) {
         const {

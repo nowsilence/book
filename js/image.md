@@ -5,7 +5,7 @@ ImageData 存储的是像素二进制数据，是一组非预乘的RGBA颜色值
 
 如果是简单的绘制图像，那么使用ImageBitmap；如果需要操作像素，则使用ImageData
 
-```
+```javascript
 const image = new Image();
 
 image.onload = function(img) {
@@ -27,6 +27,14 @@ Render.Ajax.get('./resource/texture/kerb/WPS0000001.jpg', {
     }
 });
 
-// 图片跨域问题
-https://juejin.cn/post/6844903795726483463
+// 图片跨域问题, 参考[https://juejin.cn/post/6844903795726483463]
+
+```
+
+向服务器请求图片,使用ajax请求失败报403, 可能是服务限制了请求的Accept 头包含 image/*。
+可以尝试设置accept
+
+```javascript
+xhr.setRequestHeader('Accept', 'image/webp,image/*,*/*;q=0.8');
+
 ```
