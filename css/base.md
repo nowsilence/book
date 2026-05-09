@@ -19,9 +19,9 @@ object-position: left top;/* 左上角 */
 display: flex;
 flex-direction: row;        /* 默认 → 横向 */
 flex-direction: column;     /* 纵向 */
-align-items: stretch; /* 默认 子元素，如果没有设置高度，会自动拉伸，和父元素一样高！保持子元素高度：设置align-items: center; 或 子元素设置height值； 或子元素设置 align-self: center;*/
-align-items: center; /* 垂直居中， */
-justify-content: center;        /* 水平居中 */
+align-items: stretch; /* 默认 子元素，如果没有设置高度，会自动拉伸，和父元素一样高！若要保持子元素高度：设置align-items: center; 或 子元素设置height值； 或子元素设置 align-self: center;*/
+align-items: center; /* 交叉轴（垂直于主轴的方向）对齐方式，垂直居中， */
+justify-content: center;        /* 主轴对齐对齐方式，flex-direction指向的轴，水平居中 */
 justify-content: space-between; /* 两端对齐 */
 justify-content: space-around;  /* 环绕间距 */
 gap: 12px; /* 子元素之间自动加间距，超级好用 */
