@@ -33,6 +33,11 @@ function queryToObject(queryString) {
   if (queryString === "") {
     return result;
   }
+  // /\+/g：全局匹配所有+号替换成%20（URL 里的空格）
+  // 原因：URL 会把空格编码成 +，所以要先还原成空格
+  // &：普通 URL 参数分隔符 a=1&b=2
+  // ;：也是合法的 URL 参数分隔符（部分后端用）
+  // split(/[&;]/)  按 & 或 ; 分割字符串
   var parts = queryString.replace(/\+/g, "%20").split(/[&;]/);
   for (var i = 0, len = parts.length; i < len; ++i) {
     var subparts = parts[i].split("=");

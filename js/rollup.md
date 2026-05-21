@@ -1,5 +1,5 @@
 entry
-```
+```js
 import x from "some-npm-package";
 console.log(x);
 ```

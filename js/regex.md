@@ -1,4 +1,4 @@
-```
+```js
 const str = `
 some text
 <font size="3" color="red">This is some text!</font>
@@ -12,11 +12,21 @@ some text
 const reg = /<\s*font\s+(.+?)>(.*?)<\s*\/\s*font\s*>/g;
 reg.exec(str);
 
+正则执行逻辑:
+匹配到 <font ...>
+开始走 (.*?)
+每吃一个字符，就回头看一眼：后面是不是 </font>？
+一旦发现后面是结束符 </font>，马上停止！
+
+总结：.*? = 吃到结束标志就停，绝不往前多走一步！
+
+
 // 匹配属性
 const attrReg = /\s*(.+?)\s*=\s*"\s*(.+?)\s*"/g;
 attrReg.exec(attr);
 
 (.*?) // 非贪婪模式 例如：{(.*?)}，'{123}sdfsf}' 之后匹配到第一个},{(.*)}（贪婪模式）后匹配到最后一个}
+正则默认是贪婪匹配（尽可能多拿字符），加?后变成非贪婪（尽可能少拿字符）。
 
 // 以后面的字符串开始
 ^car

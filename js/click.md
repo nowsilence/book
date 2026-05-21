@@ -38,4 +38,22 @@ const suppressClick = () => {
         window.removeEventListener('click', _suppressClick, true);
     }, 0);
 };
+
+let isDragging = false;
+
+element.addEventListener('mousedown', () => {
+  isDragging = true;
+});
+
+window.addEventListener('mousemove', () => {
+  if (!isDragging) return;
+  // 这里写拖动逻辑...
+});
+
+window.addEventListener('mouseup', () => {
+  if (isDragging) {
+    suppressClick(); // ✅ 关键：拖动结束，屏蔽下一次 click
+  }
+  isDragging = false;
+});
 ```
