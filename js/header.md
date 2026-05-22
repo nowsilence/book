@@ -17,3 +17,20 @@
 解决方法：
 * 主动添加referer，可选地址有：https://www.tianditu.gov.cn/或https://map.tianditu.gov.cn
 * 使用nginx代理，配置referer
+
+## Accept
+客户端告诉服务器本次请求：我能接收、想要什么类型的数据
+格式：Accept: 类型1,类型2;权重
+* 浏览器打开图片：Accept: image/* → 我只要图片
+* 普通网页请求：Accept: text/html → 我要网页文本
+* Ajax 默认：Accept: */* → 啥都能收
+
+常见风控场景：
+* 防盗链：只允许图片类型请求拿图片
+* 接口隔离：图片接口只放行 image/* 请求，服务器可能配置如果请求图片资源，那么accept必须是image/*,若不是报403，Ajax默认的Accept: */*
+* 防爬虫、非法跨站调取资源
+
+async function task() {
+  console.log('开始')
+  console.log('一秒后')
+}
