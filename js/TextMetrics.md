@@ -16,7 +16,7 @@ TextMetrics = {
     actualBoundingBoxAscent: 31, // 表示从 CanvasRenderingContext2D.textBaseline 属性指示的水平线到用于渲染文本的所需要的最高边界矩形的顶部的距离。
     actualBoundingBoxDescent: 10 , // 表示从 CanvasRenderingContext2D.textBaseline 属性指示的水平线到用于渲染文本的所需要的边界矩形的底部的距离。
 }
-比如字符p，
+比如字符pactualBoundingBoxLeft为正，j为负，
 
 真实高度 = actualBoundingBoxAscent + actualBoundingBoxDescent
 这是目前Canvas里最接近 “文字真实视觉高度”的值。

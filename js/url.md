@@ -49,7 +49,12 @@ function queryToObject(queryString) {
     } else {
       value = "";
     }
-
+    /**
+     * 相同键名的组合成数组
+     * 第一次出现 hobby=篮球 → {hobby: "篮球"}
+     * 第二次出现 hobby=足球 → {hobby: ["篮球", "足球"]}
+     * 第三次出现 hobby=游泳 → 往数组里 push
+     */
     var resultValue = result[name];
     if (typeof resultValue === "string") {
       // expand the single value to an array

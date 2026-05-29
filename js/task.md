@@ -12,6 +12,8 @@ await 后面的函数fn必须返回一个Promise，若没有明确返回，fn需
 
 MutationObserver 监听DOM发生修改时，自动触发回调，元素属性、文本、子节点变化
 
+MutationObserver 回调不属于V8引擎的标准微任务队列，而是浏览器自己维护的「微任务级别的回调队列」，执行优先级和标准微任务完全相同。
+
 ```js
 // 1. 创建观察器
 const observer = new MutationObserver(callback)
