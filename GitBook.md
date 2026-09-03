@@ -20,7 +20,7 @@ gitbook build
 gitbook serve
 ```
 ** fontsettings  **
-```
+```sh
 {
     "pluginsConfig": {
         "fontsettings": {

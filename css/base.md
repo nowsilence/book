@@ -27,3 +27,23 @@ justify-content: space-around;  /* 环绕间距 */
 gap: 12px; /* 子元素之间自动加间距，超级好用 */
 
 ```
+
+```css
+background: url('~/assets/images/inquiry-banner.webp') no-repeat center / cover;
+// 位置 center
+// 尺寸 cover 铺满盒子，可能会裁剪， contain：完整显示整张图，不会裁切，会留空白
+
+```
+
+```css
+#如果a标签高度大于内容，则设置父容器
+font-size: 0;
+line-height: 0;
+```
+
+```js
+// `\n` 只是 JS 字符串换行符，**不是 HTML 的 `<br>`标签**，HTML 默认会忽略 `\n` 换行符
+// `pre‑wrap`：保留空格 + 保留换行，内容超出容器自动换行 ✅常用
+// `pre‑line`：合并多余空格，只保留换行符
+white-space: pre-wrap; // 换行 
+```
