@@ -41,3 +41,10 @@ vfit.js 类似autofit
 -图表
 vue-echarts 针对echarts的封装库，两个都需要安装
 echarts 通用库
+
+-解压
+pako
+    pako.inflate(data);      // zlib 包装的 deflate（带头）
+    pako.inflateRaw(data);   // 裸 deflate（无 gzip/zlib 外壳）
+    pako.ungzip(data);       // gzip 文件
+jszip 依赖pako
