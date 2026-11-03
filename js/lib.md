@@ -12,7 +12,7 @@ js-cookie
 -加解密
 jsencrypt
 
--DOCX到HTML/Markdown/TEXT转换
+-DOCX到HTML/Markdown/TEXT转换,只转语义内容（标题、列表、表格、图片），**不精细还原字体、颜色、间距**，输出干净 html 字符串，非常适合存库、富文本回填
 mammoth
 
 -事件总线
@@ -48,3 +48,6 @@ pako
     pako.inflateRaw(data);   // 裸 deflate（无 gzip/zlib 外壳）
     pako.ungzip(data);       // gzip 文件
 jszip 依赖pako
+
+-无缝移动 demo：[https://chenxuan0000.github.io/vue-seamless-scroll/zh/]
+vue3-seamless-scroll

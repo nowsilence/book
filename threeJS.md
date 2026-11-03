@@ -12,3 +12,14 @@ class RenderPass extends THREE.Pass {
         */
 		render( renderer, writeBuffer, readBuffer /*, deltaTime, maskActive */ ) {
 ```
+
+## 环境贴图
+
+```javascript
+scene.environment = environmentMap.texture;
+// three 版本 ≥ r163
+scene.environmentIntensity = 1.0;
+
+// 若three 版本 < r163
+mesh.material.envMapIntensity = 1.0; //environmentMap.intensity;
+```
